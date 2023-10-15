@@ -2,7 +2,7 @@ syntax = 'proto3';
 
 package pb.user.v1;
 
-option go_package = "github.com/AI1411/connectpj/pb/user/v1;userv1";
+option go_package = "github.com/AI1411/connectpj/gen/pb/user/v1;userv1";
 
 service UserService {
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
@@ -31,7 +31,7 @@ message GetUserResponse {
 }
 
 message ListUsersRequest {
-  int32 page = 1;
+  int32 offset = 1;
   int32 limit = 2;
 }
 
