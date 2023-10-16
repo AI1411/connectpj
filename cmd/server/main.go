@@ -7,7 +7,8 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
-	"github.com/AI1411/connectpj/gen/pb/user/v1/userv1connect"
+	"github.com/AI1411/connectpj/gen/proto/user/v1/userv1connect"
+
 	"github.com/AI1411/connectpj/internal/env"
 	"github.com/AI1411/connectpj/internal/infra/db"
 	"github.com/AI1411/connectpj/internal/server"

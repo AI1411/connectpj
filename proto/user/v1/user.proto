@@ -1,0 +1,63 @@
+syntax = 'proto3';
+
+package proto.user.v1;
+
+option go_package = "github.com/AI1411/connectpj/gen/proto/user/v1;userv1";
+
+import "google/protobuf/timestamp.proto";
+import "pkg/validate.proto";
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
+}
+
+message CreateUserRequest {
+  string name = 1 [(validate.rules).string.min_len = 1, (validate.rules).string.max_len = 100];
+  string email = 2 [(validate.rules).string.email = true];
+}
+
+message CreateUserResponse {
+  User user = 1;
+}
+
+message GetUserRequest {
+  string id = 1 [(validate.rules).string.uuid = true];
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+message ListUsersRequest {
+  int32 offset = 1 [(validate.rules).int32.ignore_empty = true, (validate.rules).int32.gte = 0, (validate.rules).int32.lte = 100];
+  int32 limit = 2 [(validate.rules).int32.ignore_empty = true, (validate.rules).int32.gte = 0, (validate.rules).int32.lte = 100];
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  int32 total = 2;
+}
+
+message UpdateUserRequest {
+  string id = 1 [(validate.rules).string.uuid = true];
+  string name = 2 [(validate.rules).string.min_len = 1, (validate.rules).string.max_len = 255];
+  string email = 3 [(validate.rules).string.email = true, (validate.rules).string.min_len = 1, (validate.rules).string.max_len = 255];
+}
+
+message UpdateUserResponse {}
+
+message DeleteUserRequest {
+  string id = 1 [(validate.rules).string.uuid = true];
+}
+
+message DeleteUserResponse {}
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}

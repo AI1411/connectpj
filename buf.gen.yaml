@@ -6,3 +6,6 @@ plugins:
   - name: connect-go
     out: gen
     opt: paths=source_relative
+  - plugin: buf.build/bufbuild/validate-go
+    out: gen
+    opt: paths=source_relative
